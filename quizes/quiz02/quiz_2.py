@@ -76,16 +76,20 @@ def draw_line(rule_nb, first, second, length):
     rule = rule_encoded_by(rule_nb)
     # INSERT YOUR CODE HERE TO PRINT ONE LINE
     result = []
+    # check length > 1
     if length >= 1:
         result.append(first)
+    # check length  > 2
     if length >= 2:
         result.append(second)
+    # check length - 2
     for i in range(2, length):
-        temp = rule[(first, second)]
-        result.append(temp)
-        first = second
-        second = temp
+        # iterate next item
+        first, second = second, rule[(first, second)]
+        # append next digit
+        result.append(second)
 
+    # print the result
     print("".join((str(item) for item in result)))
 
 
@@ -119,13 +123,16 @@ def uniquely_produced_by_rule(line):
     if len(line) >= 2:
         first, second = line[0], line[1]
 
+    # check length-2
     for last in line[2:]:
+        # exist and not equal
         if (first, second) in rules and rules[(first, second)] != last:
+            # return directly
             return -1
-        else:
-            rules[(first, second)] = last
-        first, second = second, last
+        # next assign
+        first, second, rules[(first, second)] = second, last, last
 
+    # check result
     if len(rules) == 4:
         keys = [('0', '0'), ('0', '1'), ('1', '0'), ('1', '1')]
         result = ""
