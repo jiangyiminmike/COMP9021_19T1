@@ -12,3 +12,6 @@ print "瑞哥牛鼻"
 ```C
 printf("瑞哥牛鼻");
 ```
+```JavaScript
+console.log("瑞哥牛鼻")
+```
